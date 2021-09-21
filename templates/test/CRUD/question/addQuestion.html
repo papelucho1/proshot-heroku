@@ -1,0 +1,285 @@
+{%load widget_tweaks %}
+<div class="modal-dialog" role="document">
+  <form method="POST" action="." name="myForm" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Agregar Pregunta</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <!--ingresar encabezado-->
+
+          <div id='preguntasAlert'></div>
+
+
+
+          <div class="form-group mb-3">
+            <label for="id_question_text">Texto</label>
+            <div class="input-group mb-3 ">
+              <!-- <textarea class="form-control" placeholder="Ingresa el encabezado" id="floatingTextarea2" style="height: 100px"></textarea>-->
+              {%render_field form.question_text class="form-control" placeholder="Ingresa el encabezado" style="height: 100px"%}
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <label for="id_question_url">Url de la imagen</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3">https://</span>
+              </div>
+              <!--<input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">-->
+              {%render_field form.question_url class="form-control" placeholder="www.googla.com" aria-describedby="basic-addon3" %}
+            </div>
+
+          </div>
+         
+
+         <!--<div class="form-group">
+            <label for="inputImagen">Archivo de una imagen</label>
+            <div class="input-group mb-3">
+              <div class="card">
+                <div class="row no-gutters">
+                  <div class="col-md-4 col-lg-4">
+                    <div id="img-box"></div>
+                  </div>
+                  <div class="col-md-8 col-lg-8">
+                    <div class="card-body">
+                      {%render_field form.question_imagen class="form-control-file" id="inputImagen" %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>--> 
+          <div class="form-group">
+                                  <div class="card card-body bg-white border-light shadow-sm mb-4">
+                                        <label>Archivo de una imagen</label>
+                                        <div class="d-xl-flex align-items-center">
+                                            <div>
+                                                <!-- Avatar -->
+                                                <div class="user-avatar xl-avatar mb-3">
+                                                    <img class="rounded"
+                                                        src="../../assets/img/team/profile-picture-3.jpg"
+                                                        alt="change avatar">
+                                                </div>
+                                            </div>
+                                            <div class="file-field">
+                                                <div class="d-flex justify-content-xl-center ml-xl-3">
+                                                    <div class="d-flex">
+                                                        <span class="icon icon-md"><span
+                                                                class="fas fa-paperclip mr-3"></span></span>
+                                                              {%render_field form.question_imagen class="form-control-file" id="inputImagen" %}
+
+                                                        <div class="d-md-block text-left">
+                                                            <div class="font-weight-normal text-dark mb-1">Choose Image
+                                                            </div>
+                                                            <div class="text-gray small">JPG, GIF or PNG. Max size of
+                                                                800K</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+          </div>
+          <div class="form-group">
+            <label for="subset" class="h4">Selecciona un puntaje</label>
+            {%render_field form.subset class="form-control" id="subset"%}
+          </div>
+          <hr>
+          </hr>
+          <h3>Respuestas</h3>
+          <div id="alternativasAlert">
+
+          </div>
+          <!--ingresar respuestA-->
+          <div class="form-row mb-3 ">
+            <!--aqui van los radio con sus rspuestas-->
+            <div id="alternativas"></div>
+          </div>
+          <div class="form-row mb-3 ">
+            <div class="input-group">
+              <!--input para ingresar respuestA-->
+              <textarea class="form-control" id="answer_text" rows="3"></textarea>
+              <!--<input type="text" class="form-control" placeholder="Escribe la respuesta" id="answer_text"
+                aria-describedby="validationServer03Feedback">-->
+              <button type="button" class="btn btn-success" id="addAnswer">Agregar respuesta</button>
+            </div>
+            <div id="alterAnswer">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type='submit' class="btn btn-secondary">Agregar</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+<script>
+  var i = 0;
+
+  $(document).ready(function () {
+    $('#addAnswer').click(function () {
+      const alterAnswer = document.getElementById('alterAnswer')
+      var answer_text = document.getElementById('answer_text').value
+      console.log("addanswer")
+      if (answer_text) {
+        $('#alternativas')
+          .append(`<div class="custom-control custom-radio"  name= "alternativa" id = "idanswer${i}">
+        <input class="custom-control-input" type="radio" id="answer${i}" name="answerRadio" value="${answer_text}">
+        <label class="custom-control-label" for="answer${i}">${answer_text}</label>
+        <a id="eliminarAlternativa"  onclick="eliminarAlternativa('idanswer${i}')"><i class="far fa-trash-alt"></i></a></div>
+        `);
+
+        //.append(`</br>`);
+        i++
+        alterAnswer.innerHTML = ``
+        document.getElementById('answer_text').value = ""
+
+      } else {
+        alterAnswer.innerHTML = `<small id="passwordHelpBlock" class="form-text text-danger">
+          Una respuesta no puede estar vacía
+        </small>`
+
+      }
+
+    })
+
+
+  });
+
+  function eliminarAlternativa(answerid) {
+    console.log(answerid);
+    var elem = document.getElementById(answerid);
+    elem.remove();
+
+  }
+
+  /*
+   $(document).on('click', '#eliminarAlternativa', function(){
+ 
+       var elem = document.getElementById("alternativaEliminada");
+       var estarespuesta = this;
+       console.log(estarespuesta);
+       
+      elem.parentNode.removeChild(elem);
+        });*/
+
+  $('form').on('submit', function (e) {
+    e.preventDefault();
+    const fd = new FormData()
+    const csrf = document.getElementsByName('csrfmiddlewaretoken')
+    if (validarForm(document) !== false) {
+      fd.append('csrfmiddlewaretoken', csrf[0].value)
+      fd.append('question_text', document.getElementById('id_question_text').value)
+      fd.append('question_imagen', document.getElementById('inputImagen').files[0])
+      fd.append('question_url', document.getElementById('id_question_url').value)
+      fd.append('subset', document.getElementById('subset').value)
+      //fd.append('radios',myArray)
+      fd.append('questionAdd', document.getElementsByName('questionAdd').name)
+      const list = document.querySelectorAll('input[type=radio]')
+      let myArray = Array.from(list)
+      let radioArray = []
+      let n = 0
+      for (let radio of myArray) {
+        radioArray[n] = [radio.id, radio.value, radio.checked]
+        n++
+      }
+      fd.append('radios', JSON.stringify(radioArray));
+      console.log(fd);
+
+      $.ajax({
+        url: '{%url 'testProshot:addQuestion'%}' ,
+        type: 'POST',
+        data: fd,
+        dataType: 'json',
+        cache: false,
+        contentType: false,
+        processData: false,
+      }).done(function (data) {
+        console.log(data);
+        if (!data.hasOwnProperty('error')) {
+          location.href = '{{ index }}';
+          return false;
+        }
+        message_error_question(data);
+
+
+      }).fail(function (jqXHR, testStatus, errorThrow) {
+
+      }).always(function (data) {
+
+      });
+    };
+
+
+    /*
+          fd.append('csrfmiddlewaretoken', csrf[0].value)
+          fd.append('question_text', document.getElementById('id_question_text').value)
+          fd.append('question_imagen',document.getElementById('inputImagen').files[0])
+          fd.append('question_url',document.getElementById('id_question_url').value)
+          fd.append('subset', document.getElementById('subset').value)
+          //fd.append('radios',myArray)
+          fd.append('questionAdd',document.getElementsByName('questionAdd').name)
+          const list = document.querySelectorAll('input[type=radio]')
+          let myArray = Array.from(list)
+          let radioArray = []
+          let n = 0
+          for (let radio of myArray){
+            radioArray[n] = [radio.id , radio.value , radio.checked ]
+            n++
+          }
+          fd.append('radios', JSON.stringify(radioArray));
+          console.log(fd);
+    */
+
+
+    /*formData.append("question_text", document.getElementById('id_question_text').value);
+    formData.append("question_imagen", document.getElementById('inputImagen').value);
+    formData.append("question_url", document.getElementById('id_question_url').value);
+    formData.append("subset", document.getElementById('subset').value);
+    formData.append('radios', document.getElementsByName("answerRadio"))*/
+
+    /* const parametros = $(this).serializeArray();
+     console.log(parametros);
+     console.log();      
+     var elem = document.getElementsByName("answerRadio");
+     console.log(elem);
+     console.log(typeof(elem));
+     parametros.append(elem)
+     console.log(parametros)*/
+
+    /*
+      $.ajax({
+        url : '{%url 'testProshot:addQuestion'%}' ,
+        type : 'POST',
+        data : fd,
+        dataType:'json',
+        cache:false,
+        contentType: false,
+        processData: false,
+      }).done(function (data){
+          console.log(data);
+          if (!data.hasOwnProperty('error')){
+            Location.href  ='{%url 'testProshot:index' %}';
+            return false;
+          }
+          message_error_question(data);
+
+        
+      }).fail(function(jqXHR, testStatus, errorThrow){
+
+      }).always(function(data){
+
+      });*/
+
+  });
+
+</script>

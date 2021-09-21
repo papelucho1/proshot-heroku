@@ -1,0 +1,75 @@
+{%extends 'backoffice/layout.html'%}
+{%load widget_tweaks %}
+
+{% block nav_item_Post %}active{% endblock nav_item_Post %}
+
+{%block content%}
+<main class="content">
+                {% if user.id == post.author.id %}
+                    <div class="row py-4">
+                        <div class="col-12 ">
+                            <div class="card card-body bg-white border-light shadow-sm mb-4">
+                                <h2 class="h5 mb-4">Actualizar Post</h2>
+                               <form method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                 
+                                        <div class="row">
+                                            <div class="col-12 mb-3">
+                                                <div class="form-group">
+                                                    <label for="first_name">Titulo</label>
+                                                    {%render_field form.title class="form-control"  placeholder="Ingresa el titulo aquí"  %}
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-12 mb-3">
+                                                <div class="form-group">
+                                                    <label for="first_name">Subtitulo</label>
+                                                    {%render_field form.precontent class="form-control"  placeholder="Ingresa el titulo aquí"  %}
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 mb-3">
+                                                <div class="form-group">
+                                                    {%render_field form.content  %}
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 mb-3">
+                                                <div class="form-group">
+                                                    <label for="first_name">Selecciona categría</label>
+                                                    {%render_field form.category class="form-control"  placeholder="Ingresa el titulo aquí"  %}
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {{ form.media }}
+
+                                    {{formset.as_p}}
+
+
+                                    
+                                    <input type="submit" value="Guardar Cambios" class="btn btn-secondary">
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                {% else %}
+                    <div class ="row py-4">
+                        <div class="col">
+                            <h1>Hey, no toques los post que no son tuyos !</h1>
+                        </div>
+
+                    </div>
+                {% endif %}
+                    {%include 'backoffice/footer.html'%}
+</main>
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{%load widget_tweaks %}
+  <div class="modal-dialog" role="document">
+    <form method="POST" action = "{%url 'testProshot:editTest' test.id %}" >
+     {% csrf_token %}
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Modificar Test</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+         <div class="container">
+            <div class="form-group mb-3">
+              <label for="name_subset">Nombre Test</label>
+              <div class="input-group mb-3 ">
+                <!-- <textarea class="form-control" placeholder="Ingresa el encabezado" id="floatingTextarea2" style="height: 100px"></textarea>-->
+                {%render_field form.name_test class="form-control" %}
+              </div>
+            </div>
+            <div class="form-group mb-3">
+              <label for="zip">Tiempo (minutos)</label>
+                  <div class="input-group mb-4">
+                    {%render_field form.timer class="form-control"%}
+
+                     <div class="input-group-append">
+                         <span class="input-group-text"><i class="fas fa-clock"></i></span>
+                     </div>
+                  </div>
+            </div>
+            <div class="form-group mb-3">
+              <label for="zip">Disponible ? </label>
+                  <div class="input-group mb-4">
+                    {%render_field form.isAvailable class="form-control"%}
+                    
+                  </div>
+            </div>
+            <div class="form-group mb-3">
+              <label for="zip">Cuantas preguntas quieres mostrar ? </label>
+                  <div class="input-group mb-4">
+                    {%render_field form.cantidadDePreguntas class="form-control"%}
+                    
+                  </div>
+            </div>
+            
+            
+        
+        
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type ='submit' class="btn btn-success">Editar</button>
+        </div>
+      </div>
+    </form>
+  </div>

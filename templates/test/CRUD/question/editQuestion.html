@@ -1,0 +1,132 @@
+{%load widget_tweaks %}
+<div class="modal-dialog" role="document">
+  <form method="POST" action="{%url 'testProshot:editQuestion' object.id%}">
+    {% csrf_token %}
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Editar Pregunta</h5>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+            </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <!--ingresar encabezado-->
+          <div id='alert-box'></div>
+          {% csrf_token %}
+          <div class="form-group mb-3">
+              <label for="id_question_text">Texto</label>         
+               <div class="input-group mb-3 ">
+                <!-- <textarea class="form-control" placeholder="Ingresa el encabezado" id="floatingTextarea2" style="height: 100px"></textarea>-->
+                {%render_field form.question_text class="form-control" placeholder="Ingresa el encabezado" style="height: 100px"%}
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <label for="id_question_url" >Url de la imagen</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3">https://</span>
+              </div>
+              <!--<input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">-->
+              {%render_field form.question_url class="form-control" placeholder="www.googla.com" aria-describedby="basic-addon3" %}
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputImagen">Archivo de una imagen</label>
+            <div class="input-group mb-3">
+              <!--<input type="file" class="form-control-file" id="exampleFormControlFile1">            -->
+              <div class="card">
+                <div class="row no-gutters">
+                  <div class="col-md-4 col-lg-4">
+                    <div id="img-box"></div>
+                  </div>
+                  <div class="col-md-8 col-lg-8">
+                    <div class="card-body">
+                      {%render_field form.question_imagen class="form-control-file" id="inputImagen" %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="subset" class="h4">Selecciona un puntaje</label>
+            {%render_field form.subset class="form-control" id="subset"%}
+          </div>
+          <hr>
+          </hr>
+          <h3>Respuestas</h3>
+          <!--ingresar respuestA-->
+          <div class="form-row mb-3 ">
+            <!--aqui van los radio con sus rspuestas-->
+            <div id="alternativas"></div>
+          </div>
+          <div class="form-row mb-3 ">
+            <div class="input-group">
+              <!--input para ingresar respuestA-->
+                <textarea class="form-control" id="answer_text" rows="3"></textarea>
+              <!--<input type="text" class="form-control" placeholder="Escribe la respuesta" id="answer_text"
+                aria-describedby="validationServer03Feedback">-->
+              <button type="button" class="btn btn-success" id="addAnswer">Agregar respuesta</button>
+            </div>
+            <div id="alterAnswer">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type='submit' class="btn btn-secondary">Modificar</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+{{ aleternativas|json_script:"mis_Alternativas" }}
+
+
+<script>
+
+  console.log(JSON.parse(document.getElementById('mis_Alternativas').textContent));
+
+
+$(document).ready(function() {
+  
+  console.log('agregar alternativas');
+  var my_var = '{{ aletrnativas|escapejs }}';
+  var alternativas= JSON.parse(document.getElementById('mis_Alternativas').textContent);
+
+  console.log(JSON.parse(document.getElementById('mis_Alternativas').textContent));
+
+
+
+/*
+      const alterAnswer = document.getElementById('alterAnswer')
+        var answer_text = document.getElementById('answer_text').value
+      console.log("addanswer")
+        if (answer_text) {
+        $('#alternativas')      
+        .append(`<div class="custom-control custom-radio"  name= "alternativa" id = "idanswer${i}">
+        <input class="custom-control-input" type="radio" id="answer${i}" name="answerRadio" value="${answer_text}">
+        <label class="custom-control-label" for="answer${i}">${answer_text}</label>
+        <a id="eliminarAlternativa"  onclick="eliminarAlternativa('idanswer${i}')"><i class="far fa-trash-alt"></i></a></div>
+        `);
+        
+        //.append(`</br>`);
+        i++
+        alterAnswer.innerHTML = ``
+        document.getElementById('answer_text').value = ""
+        
+        } else{
+        alterAnswer.innerHTML = `<small id="passwordHelpBlock" class="form-text text-danger">
+          Una respuesta no puede estar vacía
+        </small>`
+        
+      }*/
+    
+    })	 ;  
+
+    
+
+
+</script>

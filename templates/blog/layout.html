@@ -1,0 +1,221 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="title" content="Proshot - Slang">
+    <meta name="description" content="Add description">
+    <meta name="author" content="Felipe y Javier">
+    <title>ProShot</title>
+    <!-- preguntarle al Pablo-->
+    <meta name="keywords" content="proshot, bootstrap template, saas website template, saas bootstrap template, saas bootstrap 4 template, saas bootstrap theme, saas bootstrap 4 theme, dashboard, saas dashboard, themesberg" />
+    <link rel="canonical" href="preguntarle al pablo">
+    
+
+    <link rel="icon" type="image/png" sizes="16x16" href="{%static 'img/Logo/geo-png.png' %}">
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+   <!--<link href="{%static 'css/iconos.css'%}" rel="stylesheet" type="text/css">-->
+
+  <!-- icons-->
+  <script src="https://kit.fontawesome.com/c05ad7e94c.js" crossorigin="anonymous"></script>
+
+  
+
+    <style>
+    .carousel-item {
+        height: 100vh;
+        min-height: 350px;
+        background: no-repeat center center scroll;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        }
+    .navbar {
+    background-color: black !important;
+    }
+
+    .page-section {
+        padding: 6rem 0;
+        }
+    .page-section h2.section-heading {
+        font-size: 2.5rem;
+        margin-top: 0;
+        margin-bottom: 1rem;
+        }
+
+    .icon-rounded {    
+        background: black;
+        color: white;
+        border-radius: 60%;
+        padding: 0.2em;
+        line-height: initial !important; /* reset line-height */
+        height: 1.5em;
+        width: 1.5em;
+        text-align:center;
+    }
+
+
+    
+  
+    #footer-icons{
+        color: black;
+
+    }
+    #footer-icons:hover{
+        color: #C20000 ;
+
+    }
+    .btn{
+        color: white;
+        border-radius: 0%;
+        background-color: #E62C3B ;
+
+    }
+    .btn:hover{
+        color: white;
+        background-color: #C20000 ;
+
+    }
+
+
+/* Underline From Center */
+.hvr-underline-from-center {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  position: relative;
+  overflow: hidden;
+}
+.hvr-underline-from-center:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 51%;
+  right: 51%;
+  bottom: 0;
+  background: white;
+  height: 4px;
+  -webkit-transition-property: left, right;
+  transition-property: left, right;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+.hvr-underline-from-center:hover:before, .hvr-underline-from-center:focus:before, .hvr-underline-from-center:active:before {
+  left: 0;
+  right: 0;
+}
+/* Grow */
+.hvr-grow {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+}
+.hvr-grow:hover, .hvr-grow:focus, .hvr-grow:active {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+
+
+    </style>
+  
+
+
+</head>
+
+<body>
+    {% include "blog/navbar.html" %}
+    {%block content%} 
+
+  {%endblock%}
+    
+   
+        
+    
+    <!-- Footer -->
+   {%include 'blog/footer.html'%}
+    
+
+  
+
+    <!-- Bootstrap core JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Third party plugin JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+
+   
+    <script >
+        (function ($) {
+        "use strict"; // Start of use strict
+
+        // Smooth scrolling using jQuery easing
+        $('a.js-scroll-trigger[href*="#"]:not([href="#"])').click(function () {
+
+            if (
+               
+                location.pathname.replace(/^\//, "") ==
+                    this.pathname.replace(/^\//, "") &&
+                location.hostname == this.hostname
+            ) {
+                 console.log("scrolling");
+                var target = $(this.hash);
+                target = target.length
+                    ? target
+                    : $("[name=" + this.hash.slice(1) + "]");
+                if (target.length) {
+                    $("html, body").animate(
+                        {
+                            scrollTop: target.offset().top - 72,
+                        },
+                        1000,
+                        "easeInOutExpo"
+                    );
+                    return false;
+                }
+            }
+        });
+    
+        // Collapse Navbar
+        })(jQuery);
+        /*apara que se esocnda el navbar
+        var prevScrollpos = window.pageYOffset;
+        window.onscroll = function() {
+        var currentScrollPos = window.pageYOffset;
+        if (prevScrollpos > currentScrollPos) {
+            $('#navbar').animate({
+                 top: '0px'
+            },{duration: 50});
+            //document.getElementById("navbar").style.top = "0";
+        } else {
+            $('#navbar').animate({
+                 top: '-100'
+            },{duration: 50});
+           // document.getElementById("navbar").style.top = "-100px";
+        }
+        prevScrollpos = currentScrollPos;
+        }
+        */
+    </script>
+
+  
+</body>
+
+</html>

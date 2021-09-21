@@ -1,0 +1,42 @@
+{%load static %}
+
+
+
+  <div class="container">
+      <div class="row justify-content-center mb-4 mb-lg-6">
+                    <div class="col-12 text-center">
+                        <h1 class="display-3 mb-3 mb-lg-4">Blog</h1>
+                        <p class="lead"> últimos posts.</p>
+                    </div>
+                </div>
+        
+      <div class="row mb-lg-5">
+        <!-- Blog Entries Column -->        
+  
+          <div class="card-columns">
+          {%for post in posts|slice:"0:6"%}
+                            <div class="card bg-white border-light shadow-soft p-4 rounded ">
+                                <a href="{% url 'blog:detail' id=post.id %}" class="stretched-link">
+                                    <img class="card-img-top" src="{{post.pictures.0.url}}" >
+                                </a>
+                                <div class="card-body p-0 pt-4">
+                                    <h5 class="card-title">{{post.title}}</h5>
+                                    <div class="d-flex align-items-center my-4">
+                                        <h6 class="text-muted small ml-2 mb-0">Creado por {{post.author}}.</h6>
+                                    </div>
+                                    <p>{{post.precontent}}</p>
+                                  
+                                </div>
+                            </div>
+
+                        {%endfor%}
+
+          </div>
+      </div>  
+         <div class="row">
+           <div class="col text-center">
+                <a href="{% url 'blog:blog'%}"  class="btn btn-primary animate-up-2"><span class="mr-2"><i class="fas fa-book-open"></i></span> Ver todos los posts</a>
+            </div>
+          </div>      
+
+  </div> 

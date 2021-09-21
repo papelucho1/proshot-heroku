@@ -1,0 +1,37 @@
+{%extends "blog/layout-contema.html"%}
+{%load static%}
+{%block head%}
+{%endblock%}
+{%block content%}
+       
+    
+    <main>       
+        <!--Intro1-->
+        {%include 'blog/carousel.html'%}
+        <!--sectionn1-->
+        <section class="section section-sm " >
+            {% include "blog/section1.html" %}
+        </section>
+           <!--Intro 2-->
+        <section class="section section-sm py-7 py-lg-10 bg-default">
+            {%include 'blog/section3.html'%}
+        </section>
+            <!--Trabaja con nosotros-->
+        <section class="section section-sm  line-bottom-default " id="trabajaConNosotros">
+            {% include "blog/registerUser.html" %}
+        </section>
+        
+            <!--Blog-->
+        <section class="section  section-sm  line-bottom-light " id="blog">
+            {% include "blog/posts.html" %}
+        </section>
+    
+    
+     
+        
+
+    </main>
+{%endblock%}
+{%block js%}
+
+{%endblock%}

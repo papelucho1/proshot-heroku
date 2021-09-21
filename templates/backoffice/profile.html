@@ -1,0 +1,165 @@
+{%extends 'backoffice/layout.html'%}
+{%load widget_tweaks%}
+{% block nav_item_Settings %}active{% endblock nav_item_Settings %}
+{%block content%}
+ <main class="content">
+                    
+                    <div class="row">
+                        <div class="col-12 col-xl-12">
+                            <div class="card card-body bg-white border-light shadow-sm mb-4 mt-4">
+                                <h2 class="h5 mb-4">Información General</h2>
+                                                {%if user_form.errors%}
+												<P> Revisa los siguiente errores:</p>
+													{%for field in user_form%}
+														{%if field.errors%}
+															<div class ='alert alert-primary' role='alert'>
+																{{field.label}} : {{field.errors|striptags}}
+															</div>
+														{%endif%}
+													{%endfor%}
+												{%endif%}
+												{%if user_form.is_valid%}
+                                                <div class="alert alert-success" role="alert">
+                                                    <span class="alert-inner--text">Datos actualizados correctamente! </span>
+                                                </div>
+												{%endif%}
+                                <form method="POST">
+                                {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <div class="form-group">
+                                                <label for="id_first_name">Nombres</label>
+                                                {%render_field user_form.first_name class="form-control" placeholder="Ingresa tus nombres"%}
+                                             
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <div class="form-group">
+                                                <label for="last_name">Apellidos</label>
+                                                {%render_field user_form.last_name class="form-control" placeholder="Tambien tus apellidos"%}
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center">
+                                       
+                                        <div class="col-md-6 mb-3">
+                                            <div class="form-group">
+                                                <label for="genero">Cómo te identificas</label>
+                                                {%render_field persona_form.genero class="form-control"%}
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <div class="form-group">
+                                                <label for="email">Correo electrónico</label>
+                                                {%render_field user_form.email class="form-control" placeholder="name@company.com"%}
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <div class="form-group">
+                                                <label for="phone">Teléfono</label>
+                                                {%render_field persona_form.phone class="form-control" placeholder="0000 0000"%}
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h2 class="h5 my-4">Dirección</h2>
+                                    
+                                    <div class="row">
+                                        <div class="col-sm-4 mb-3">
+                                            <div class="form-group">
+                                                <label for="city">Ciudad</label>
+                                                {%render_field persona_form.city class="form-control" placeholder="Nombre de la ciudad"%}
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 mb-3">
+                                            <div class="form-group">
+                                                <label for="country">Región</label>
+                                                {%render_field persona_form.region class="form-control"%}
+
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="mt-3">
+                                        <button type="submit" class="btn btn-primary" name= 'saveDetails'>Guardar cambios</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-xl-12">
+                            <div class="card card-body bg-white border-light shadow-sm mb-4 ">
+                                <h2 class="h5 mb-4">Cambiar contraseña</h2>
+                                <form method='POST'> 
+                                {% csrf_token %}
+
+                                    <div class="row">
+                                        <div class="col-sm-4 mb-3">
+                                            <div class="form-group">
+                                                <label for="city">Contraseña actual</label>
+                                                {%render_field password_form.old_password class="form-control" placeholder="Contraseña" %}
+                                             
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4 mb-3">
+                                            <div class="form-group">
+                                                <label for="city">Contraseña nueva</label>
+                                                {%render_field password_form.new_password1 class="form-control" placeholder="Contraseña nueva" %}
+                                             
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{ password_form.new_password1.help_text }}
+                                    <div class="row">
+                                        <div class="col-sm-4 mb-3">
+                                            <div class="form-group">
+                                                <label for="city">Reingresa contraseña nueva</label>
+                                                {%render_field password_form.new_password2 class="form-control" placeholder="Reingresa contraseña nueva" %}
+                                             
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3">
+                                        <button type="submit" class="btn btn-primary" name="savePassword">Cambiar contraseña</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    {%include 'backoffice/footer.html'%}
+           
+                </main>
+    <script>
+    {% if messages %}
+        {% for message in messages %}
+                    {% if message.tags == "success" %}
+                        Swal.fire(
+                        'Tus datos se han cambiado',
+                        '{{message}}',
+                        'success'
+                        )                     
+                    {% endif %}
+                    {% if message.tags == "error" %}
+                        Swal.fire(
+                        'Error en los cambios',
+                        '{{message}}',
+                        'error'
+                        )                     
+                    {% endif %}
+            {% endfor %}
+
+    {% endif %}
+    </script>
+{%endblock%}

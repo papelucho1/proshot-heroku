@@ -1,0 +1,55 @@
+/*------------------------------*/
+/*-------CONTENT CSS------------*/
+/*------------------------------*/
+/*custom font*/
+@import "//fonts.googleapis.com/css?family=Lato";
+
+/*basic reset*/
+* {margin: 0; padding: 0;}
+
+body {
+	/*--font-family: montserrat, arial, verdana;*/
+	font-family: 'Lato', sans-serif;
+	background-color: black;
+
+}
+/*form styles*/
+#msform {
+	width: 80%;
+	/*margin: 50px auto;*/
+	margin: auto;
+	/*text-align: center;*/
+	position: relative;
+ /* margin-top: 1%;*/
+  margin-bottom: 10%;
+}
+
+.clock{
+  margin-top: 5%;
+}
+#msform fieldset {
+	
+	background: white;
+	border: 0 none;
+	border-radius: 3px;
+	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+	padding: 20px 30px;
+	box-sizing: border-box;
+	/*width: 80%;*/
+	/*margin: 0 20% ;*/
+	
+
+	
+	
+	/*stacking fieldsets above each other*/
+	position: relative;
+}
+/*Hide all except first fieldset*/
+#msform fieldset:not(:first-of-type) {
+	display: none;
+}
+
+
+
+
+ 

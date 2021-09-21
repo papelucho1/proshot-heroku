@@ -1,0 +1,18 @@
+{%extends 'backoffice/layout.html'%}
+{%block content%}
+
+  <h1> {{ post.title }} </h1>
+  <hr>
+  <br/>
+  {{ post.content|safe }}
+
+  <br/>
+  {% if user.is_authenticated %}
+    {% if user.id == post.author.id %}
+      <a href="{% url 'backoffice:update_post' post.pk %}"> Editar </a>
+      <a href="{% url 'backoffice:delete_post' post.pk %}"> Eliminar </a>
+      <br/>
+      <a href="{% url 'backoffice:posts' %}" class ="btn btn-secondary"> Volver </a>
+    {% endif %}
+  {% endif %}
+{% endblock %}

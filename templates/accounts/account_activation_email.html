@@ -1,0 +1,8 @@
+{%autoescape off%}
+Hola, {{user.username}},
+
+Hace click en el siguiente link para activar tu cuenta 
+
+http://{{domain}}{%url  'blog:activate' uidb64=uid token=token%}
+
+{% endautoescape %}

@@ -1,0 +1,50 @@
+{%extends 'backoffice/layout.html'%}
+{% load widget_tweaks %}
+{% block nav_item_Post %}active{% endblock nav_item_Post %}
+
+{% block content %}
+<main class="content">
+           <div class="row py-4">
+                        <div class="col-12 ">
+                            <div class="card card-body bg-white border-light shadow-sm mb-4">
+                                <h1 >Mis posts</h1>
+                               <ul>
+                                  {% for post in object_list %}
+                                      {% if user.is_authenticated %}
+                                        {% if user.id == post.author.id %}
+                                    <li>
+                                      <a href="{% url 'blog:detail' post.pk %}">
+                                        {{ post.title }}
+                                      </a>
+                                      - {{ post.created_on }} 
+                                
+                                          <a href="{% url 'backoffice:update_post' post.pk %}"> Editar </a>
+                                          <a onclick="deletePost('{%url 'backoffice:delete_post' post.id%}')"><i class="far fa-trash-alt"></i>Eliminar </a>
+                                        
+                                    </li>
+                                    {% endif %}
+                                      {% endif %}
+                                  {% endfor %}
+                                  
+                            </div>  
+                        </div>                             
+              </div>                
+            {%include 'backoffice/footer.html'%}
+
+                                
+</main>
+
+
+
+<div class="modal fade" id="deletePost" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+</div>
+
+<script type="application/javascript">
+    function deletePost(url){
+      console.log("clickclick")
+        $('#deletePost').load(url, function(){            
+            $(this).modal('show');
+        })
+    }
+</script>
+{% endblock %}

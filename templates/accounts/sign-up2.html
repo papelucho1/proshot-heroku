@@ -1,0 +1,364 @@
+{%extends "blog/layout-contema.html"%}
+{% load widget_tweaks %}
+{%load static%}
+{%block content%}
+
+
+<section class="section-header pb-10 bg-default text-white">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 text-center">
+                <h1 class="display-1 mb-4">Crear cuenta</h1>
+           
+            </div>
+        </div>
+    </div>            
+    <div class="pattern bottom"></div>
+
+</section>
+<section class="section section-sm mt-n9 ">
+    <div class="container">
+        <div class="row align-items-start justify-content-around">
+             
+            <form action=""  method = "POST" class="col-12">
+      
+               {% csrf_token %}
+                <div class="card bg-soft border-light p-3 mb-4">
+                  
+                    <div class="card-body p-4">
+                        <h4 class="mb-4 mb-lg-5">Datos de usuario</h4>
+                        <div class="row">
+                            <div class="col-12 col-lg-4">
+                                <div class="form-group">
+                                    <label class="form-label h6" for="ConfirmEmailLabel"> Nombre de usuario <span
+                                            class="text-danger">*</span> </label>
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                        </div>
+                                        {%render_field registerForm.username class="form-control"  placeholder="Nombre de usuario"%}
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-4">
+                                <div class="form-group">
+                                    <label class="form-label h6" for="ConfirmEmailLabel"> Contraseña <span class="text-danger">*</span> </label>
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                        </div>
+                                        {%render_field registerForm.password1 class="form-control"  placeholder="Contraseña"%}
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-4">
+                                <div class="form-group">
+                                    <label class="form-label h6" for="ConfirmEmailLabel"> Confirma tu contraseña <span
+                                            class="text-danger">*</span> </label>
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                        </div>
+                                        {%render_field registerForm.password2 class="form-control"  placeholder="Reingresa tu contraseña"%}
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                             
+                                        
+                    </div>
+                </div>
+                <!-- About Form -->
+                <div class="card bg-soft border-light p-3 mb-4">
+                    {%if registerForm.errors%}
+                                <P> Corrije los siguiente errores:</p>
+                                {%for field in registerForm%}
+                                    {%if field.errors%}
+                                        <div class ='alert alert-danger' role='alert'>
+                                            {{field.label}} : {{field.errors|striptags}}
+                                        </div>
+                                    {%endif%}
+                                {%endfor%}
+                    {%endif%}
+                    <div class="card-body p-4">
+                        <h4 class="mb-4 mb-lg-5">Sobre ti</h4>
+                        <div class="row">
+                            <div class="col-12 col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-label h6" for="firstNameLabel">Nombres <span
+                                            class="text-danger">*</span></label>
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-user-alt"></i></span>
+                                        </div>
+                                        {%render_field registerForm.first_name class="form-control"  placeholder="Given names"%}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-label h6" for="EmailLabel">Apellidos <span
+                                            class="text-danger">*</span></label>
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-user-alt"></i></span>
+                                        </div>
+                                        {%render_field registerForm.last_name class="form-control"  placeholder="Last names"%}
+                             
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-8">
+                                <div class="form-group">
+                                    <label class="form-label h6" for="ConfirmEmailLabel"> Correo <span
+                                            class="text-danger">*</span> </label>
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                        </div>
+                                        {%render_field registerForm.email class="form-control"  placeholder="Correo electrónico"%}
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12 col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="form-label h6" for="cardNameLabel">Teléfono de contacto</label>
+                                                    <div class="input-group mb-4">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i
+                                                                    class="fas fa-phone-alt"></i></span>
+                                                        </div>
+                                                        {%render_field personaForm.phone class="form-control" placeholder="Número de telefono" %}
+                                                    </div>
+                                    </div>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="form-label h6" for="cardNameLabel">Cómo te identificas</label>
+                                                    <div class="input-group mb-4">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fas fa-transgender-alt"></i></span>
+                                                        </div>
+                                                        {%render_field personaForm.genero class="form-control" %}
+                                                    </div>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                                       <div class="col-6 col-sm-12 col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="form-label h6" >En qué ciudad región?</label>
+                                                    <div class="input-group mb-4">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fas fa-map"></i></span>
+                                                        </div>
+                                                        {%render_field personaForm.region class="form-control" %}
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                      
+                                             <div class="col-6 col-sm-12 col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="form-label h6" for="cardNumberLabel">En qué ciudad vives ? <span class="text-danger">*</span></label>
+                                                    <div class="input-group mb-4">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fas fa-map-marked-alt"></i></span>
+                                                        </div>
+                                                        {%render_field personaForm.city class="form-control" placeholder="Ciudad" %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                        
+                        </div>
+                             
+                                       
+                             
+                                        
+                    </div>
+                </div>
+                <!-- License Form -->
+                <div class="card bg-soft border-light p-3 mb-4">
+                    <div class="card-body p-4">
+                        <h4 class="mb-4 mb-lg-5">Quieres trabajar con nosotros?</h4>
+                        <div class="row">
+                            <div class="col-12">
+                                <!-- Tab -->
+                                <nav>
+                                    <div class="nav nav-tabs flex-row mb-4" id="nav-tab" role="tablist">
+                                        <button class="nav-item nav-link border border-light rounded font-weight-normal mr-4 active"
+                                            id="nav-credit-card-tab" data-toggle="tab" href="#nav-credit-card"
+                                            role="tab" aria-controls="nav-credit-card" aria-selected="true"
+                                            onclick = "make_required()" 
+                                            name = "saveFotograrfo"><span
+                                                class="fas fa-camera-retro mr-2"></span>Si</button>
+                                        <button class="nav-item nav-link border border-light rounded font-weight-normal "
+                                            id="nav-paypal-tab" data-toggle="tab" href="#nav-paypal" role="tab"
+                                            aria-controls="nav-paypal" aria-selected="false"
+                                            onclick = "make_unrequired()"><span
+                                                class="fab fa-cc-paypal mr-2"
+                                                 ></span>No</button>
+                                    </div>
+                                </nav>
+                                <!-- Tab -->
+                                <div class="tab-content mt-4 mt-lg-5" id="nav-tabContent">
+                                    <!-- Credit-card Tab -->
+                                    <div class="tab-pane fade show active" id="nav-credit-card" role="tabpanel" aria-labelledby="nav-credit-card-tab">
+                                        <div class="row">
+                                            
+                                       
+                                        </div>
+                                      
+                                        <div class="row">
+                                            <div class="col-12 col-lg-12">
+                                                <div class="form-group">
+                                                    <label class="form-label h6">Sube un link donde podamos ver tus fotos</label>
+                                                    <div class="input-group mb-4">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fas fa-briefcase"></i></span>
+                                                        </div>
+                                                        {%render_field fotografoForm.portafolio class="form-control" %}
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6 col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="form-label h6">Cuál es tu instagram?</label>
+                                                    <div class="input-group mb-4">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fab fa-instagram"></i></span>
+                                                        </div>
+                                                        {%render_field fotografoForm.instagram class="form-control" %}
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="form-label h6" >Qué idiomas dominas?</label>
+                                                    <div class="input-group mb-4">
+                                                     
+                                                        {%render_field fotografoForm.idioma %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="form-label h6" >Cuáles son tus categorías en la fotografía ? </label>
+                                                    <div class="input-group mb-4">
+                                                      
+                                                        {%render_field fotografoForm.categoriasEspecialidad %}
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="form-label h6" >Disponibilidad</label>
+                                                    <div class="input-group mb-4">
+                                                   
+                                                        {%render_field fotografoForm.disponibilidad %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                              
+                                <!-- Paypal Tab -->
+                                <div class="tab-pane fade" id="nav-paypal" role="tabpanel"   aria-labelledby="nav-paypal-tab">
+                                    <div class="row">
+                                        <div class="col-12 ">
+                                            <div class="form-group">
+                                                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p>
+                                                
+                                            </div>
+                                        </div>
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End of tab -->
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-lg-9 mb-2">
+                <div class="form-group form-check mb-2">
+                    <input type="checkbox" class="form-check-input" id="terminoslegalesID" required>
+                    <label class="form-check-label form-check-sign-white" for="terminoslegalesID"><span class="text-gray">
+                    Yo he leido y aceptado los  <a class="font-weight-bolder text-primary"
+                                href="{% url 'blog:terms'%}">Términos y condiciones</a></span></label>
+                </div>
+               
+            </div>
+            <div class="col-12 col-lg-3 text-center mb-4 mb-lg-0">
+                <button type="submit" id = "submitBtn" class="btn btn-block btn-primary font-weight-bold" name = "saveFotografo">Crear Cuenta</button>
+            </div>
+        </div>
+        </form>
+    </div>
+    </div>
+</section>
+    <script>
+    {% if messages %}
+        {% for message in messages %}
+                    {% if message.tags == "success" %}
+                        Swal.fire(
+                        'Tu cuenta se ha creado',
+                        'Te hemos enviado un correo de activación',
+                        'success'
+                        )                     
+                    {% endif %}
+                    {% if message.tags == "warning" %}
+                        Swal.fire(
+                        'Te faltaron datos por rellenar',
+                        'revisa bien los campos que te faltaron',
+                        'warning'
+                        )                     
+                    {% endif %}
+            {% endfor %}
+
+    {% endif %}
+
+    function make_unrequired(){
+        console.log("eliminar requeridos")
+        document.getElementById("id_instagram").required = false;
+        document.getElementById("id_portafolio").required = false;
+        document.getElementById("submitBtn").setAttribute("name","");
+
+        
+ 
+    }
+
+    function make_required(){
+        console.log("agreagar requerido")
+        document.getElementById("id_instagram").required = true;
+        document.getElementById("id_portafolio").required = true;
+        document.getElementById("submitBtn").setAttribute("name","saveFotografo");
+
+
+
+
+    }
+
+
+
+
+    </script>
+
+{%endblock%}

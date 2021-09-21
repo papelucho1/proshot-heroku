@@ -1,0 +1,169 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head> 
+    <!-- Primary Meta Tags -->
+<title>ProShot</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="title" content="ProShot">
+<meta name="author" content="Themesberg">
+<meta name="description" content="Rocket is a premium SaaS Bootstrap 4 Dashboard template featuring over 27 presentational and technical pages including pricing, support, team, careers and many more.">
+<meta name="keywords" content="bootstrap, bootstrap template, saas website template, saas bootstrap template, saas bootstrap 4 template, saas bootstrap theme, saas bootstrap 4 theme, dashboard, saas dashboard, themesberg" />
+<link rel="canonical" href="https://themes.getbootstrap.com/product/rocket/">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://demo.themesberg.com/rocket">
+<meta property="og:title" content="ProShot">
+<meta property="og:description" content="Rocket is a premium SaaS Bootstrap 4 Dashboard template featuring over 27 presentational and technical pages including pricing, support, team, careers and many more.">
+<meta property="og:image" content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/rocket/rocket-preview.jpg">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://demo.themesberg.com/rocket">
+<meta property="twitter:title" content="Rocket - Bootstrap Startup Dashboard Template">
+<meta property="twitter:description" content="Rocket is a premium SaaS Bootstrap 4 Dashboard template featuring over 27 presentational and technical pages including pricing, support, team, careers and many more.">
+<meta property="twitter:image" content="https://themesberg.s3.us-east-2.amazonaws.com/public/products/rocket/rocket-preview.jpg">
+
+<!-- Favicon -->
+<link rel="apple-touch-icon" sizes="120x120" href="./assets/img/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./assets/img/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./assets/img/favicon/favicon-16x16.png">
+<link rel="manifest" href="./assets/img/favicon/site.webmanifest">
+<link rel="mask-icon" href="./assets/img/favicon/safari-pinned-tab.svg" color="#ffffff">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="theme-color" content="#ffffff">
+
+<!-- Fontawesome -->
+<link type="text/css" href=" {%static 'vendor/@fortawesome/fontawesome-free/css/all.min.css'%}" rel="stylesheet">
+
+<!-- Prism -->
+<link type="text/css" href="{%static 'vendor/prismjs/themes/prism.css'%}" rel="stylesheet">
+
+<!-- VectorMap -->
+<link rel="stylesheet" href="{%static 'vendor/jqvmap/dist/jqvmap.min.css'%}">
+
+<!-- Rocket CSS -->
+<link type="text/css" href="{%static 'css/rocket.css'%}" rel="stylesheet">
+
+<!--DataTables-->
+<link rel="stylesheet" type="text/css" href="{%static 'DataTables/datatables.min.css'%} "/>
+
+<!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+-->
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    
+{%block head%}
+{%endblock%}
+
+<!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
+
+</head>
+
+    <body>
+      
+        {% include "blog/navbar2.html" %}
+
+        {%block content%} 
+
+        {%endblock%}
+            
+        
+                
+            
+            <!-- Footer -->
+        {%include 'blog/footer.html'%}
+        
+      
+    <!-- Core -->
+        <script src="{%static 'vendor/jquery/dist/jquery.min.js'%}"></script>
+        <script src="{%static 'vendor/popper.js/dist/umd/popper.min.js'%}"></script>
+        <script src="{%static 'vendor/bootstrap/dist/js/bootstrap.min.js'%}"></script>
+        <script src="{%static 'vendor/headroom.js/dist/headroom.min.js'%}"></script>
+
+        <!-- Vendor JS -->
+        <script src="{%static 'vendor/countup.js/dist/countUp.min.js'%}"></script>
+        <script src="{%static 'vendor/jquery-countdown/dist/jquery.countdown.min.js'%}"></script>
+        <script src="{%static 'vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js'%}"></script>
+        <script src="{%static 'vendor/prismjs/prism.js'%}"></script>
+
+        <!-- Chartist -->
+        <script src="{%static 'vendor/chartist/dist/chartist.min.js'%}"></script>
+        <script src="{%static 'vendor/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js'%}"></script>
+
+        <!-- Vector Maps -->
+        <script src="{%static 'vendor/jqvmap/dist/jquery.vmap.min.js'%}"></script>
+        <script src="{%static 'vendor/jqvmap/dist/maps/jquery.vmap.world.js'%}"></script>
+
+        <!-- Rocket JS -->
+        <script src="{%static 'assets/js/rocket.js'%}"></script>
+        
+        <!-- Funciones JS -->        
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+        <!--DataTable-->
+        <script type="text/javascript" src="{%static 'DataTables/datatables.min.js'%} "></script>
+
+        <script src="{%static 'js/function.js'%}"></script>
+        <script>
+             (function ($) {
+        "use strict"; // Start of use strict
+
+        // Smooth scrolling using jQuery easing
+        $('a.js-scroll-trigger[href*="#"]:not([href="#"])').click(function () {
+
+            if (
+               
+                location.pathname.replace(/^\//, "") ==
+                    this.pathname.replace(/^\//, "") &&
+                location.hostname == this.hostname
+            ) {
+                 console.log("scrolling");
+                var target = $(this.hash);
+                target = target.length
+                    ? target
+                    : $("[name=" + this.hash.slice(1) + "]");
+                if (target.length) {
+                    $("html, body").animate(
+                        {
+                            scrollTop: target.offset().top - 72,
+                        },
+                        1000,
+                        "easeInOutExpo"
+                    );
+                    return false;
+                }
+            }
+        });
+    
+        // Collapse Navbar
+        })(jQuery);
+        /*apara que se esocnda el navbar
+        var prevScrollpos = window.pageYOffset;
+        window.onscroll = function() {
+        var currentScrollPos = window.pageYOffset;
+        if (prevScrollpos > currentScrollPos) {
+            $('#navbar').animate({
+                 top: '0px'
+            },{duration: 50});
+            //document.getElementById("navbar").style.top = "0";
+        } else {
+            $('#navbar').animate({
+                 top: '-100'
+            },{duration: 50});
+           // document.getElementById("navbar").style.top = "-100px";
+        }
+        prevScrollpos = currentScrollPos;
+        }
+        */
+        </script>
+        {%block js%}
+        
+        {%endblock%}
+    </body>
+
+</html>

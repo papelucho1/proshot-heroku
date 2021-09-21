@@ -1,0 +1,39 @@
+ {%load static %}
+<footer>
+    <div class="px-4 py-5 mt-5 text-center">
+        <a  href="{%url 'blog:index'%}">
+         <img class="d-block mx-auto mb-4" src="{%static 'img/logonegroa1500x500.png '%}" width="210" height="70" alt="proshot" >
+        </a>
+        <div class="col-lg-6 mx-auto">
+            <ul class="list-inline text-center " >
+                                <li class="list-inline-item">
+                                    <a href="#!" class = "text-default">
+                                        <span class="fa-stack fa-lg" >
+                                            <i class="fas fa-circle fa-stack-2x"></i>
+                                            <i class="fab fa-twitter fa-stack-1x fa-inverse"  ></i>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item ">
+                                    <a href="#!" class = "text-default">
+                                        <span class="fa-stack fa-lg">
+                                            <i class="fas fa-circle fa-stack-2x"></i>
+                                            <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="#!" class = "text-default">
+                                        <span class="fa-stack fa-lg ">
+                                            <i class="fas fa-circle fa-stack-2x"></i>
+                                            <i class="fab fa-instagram fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+                                </li>  
+                                
+                            
+                    </ul>
+        </div>
+    <h5 class="display-5 fw-bold">© 2021 Copyright: <a href="{% url 'blog:index' %}">Proshot</a></h5>
+    </div>
+</footer>

@@ -1,0 +1,73 @@
+{%extends "blog/layout-contema.html"%}
+{%load static%}
+{%block head%}
+{%endblock%}
+{%block content%}
+       
+   <article>
+            <!-- Hero -->
+            <section class="section-header pb-7 pb-lg-10 bg-default text-white">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-lg-10 text-center">
+                            <div class="mb-4">
+
+                                <a href="{% url 'blog:blogFiltred' post.category.id %}" class="badge badge-md badge-{{post.category.color}} text-uppercase mr-2 px-3">{{post.category.categoryName}}</a>
+                            </div>
+                            <h1 class="display-3 mb-4 px-lg-5">{{ post.title }}</h1>
+                            <div class="post-meta"> 
+                                <span class="font-weight-bold mr-3"> Escrito por {{ post.author }}</span> 
+                                <span class="post-date mr-3">  {{post.created_on}}</span> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pattern bottom"></div>
+            </section>
+            <div class="section section-sm bg-white pt-5 text-black">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-lg-8">
+                                
+                             {{ post.content|safe }} 
+
+                           <!--  {% for picture in post.pictures.all %}
+                                <div class="carousel-item {% if forloop.counter0 == 0 %} active {% endif %}">
+                                    <img
+                                    src="{{picture.image.url}}"
+                                    class="d-block w-100"
+                                    alt="..."
+                                    />
+                                </div>
+                                {% endfor %}    -->      
+                            {% for picture in post.pictures.all %}
+                                    <img src="{{picture.image.url}}"
+                                    class="d-block w-100"
+
+                                    alt="{{picture.image_name}}"
+                                    />
+                                    Imagen: {{picture.image_name}}
+                            {% endfor %}                        
+                        </div>
+                    </div>
+                    <div class="row justify-content-sm-center align-items-center py-3 mt-3">
+                        <div class="col-12 col-lg-8">
+                            <div class="row">
+                                <div class="col-9 col-md-6">
+                                    <h6 class="font-weight-bolder d-inline mb-0 mr-3">Share:</h6>
+                                    <button class="btn btn-sm mr-3 btn-icon-only btn-pill btn-twitter d-inline"><span class="btn-inner-icon"><i class="fab fa-twitter"></i></span></button>
+                                    <button class="btn btn-sm mr-3 btn-icon-only btn-pill btn-facebook d-inline"><span class="btn-inner-icon"><i class="fab fa-facebook-f"></i></span></button>
+                                    <button class="btn btn-sm btn-icon-only btn-pill btn-reddit d-inline"><span class="btn-inner-icon"><i class="fab fa-reddit-alien"></i></span></button>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    
+   
+{% endblock %}
+
+

@@ -1,0 +1,32 @@
+{%extends "blog/layout-contema.html"%}
+{%load static%}
+{%block head%}
+{%endblock%}
+{%block content%}
+<main>  
+        <section class="section-header bg-default text-white pb-9 pb-lg-12 mb-4 mb-lg-6">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-8 text-center">
+                        <h1 class="display-2 mb-3">Sobre nuestros test</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="pattern bottom"></div>
+        </section>
+        
+        <section class="section section-sm " >
+            {% include "blog/section1.html" %}
+        </section>
+         
+          <!--Intro 2-->
+        <section class="section section-sm py-7 py-lg-10 bg-default">
+            {%include 'blog/section3.html'%}
+        </section>
+
+</main>  
+{%endblock%}
+
+{%block js%}
+
+{%endblock%}

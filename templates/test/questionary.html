@@ -1,0 +1,88 @@
+{%extends 'test/layouttest.html'%}
+{%load static%}
+{%load widget_tweaks %}
+{%block head%}
+     
+
+   <!-- <script src={%static 'js/ajax.js'%} defer></script>-->
+{%endblock%}
+{%block content%}
+
+
+  <!-- partial:index.partial.html -->
+  <div class="container" >
+
+    <div class="row justify-content-center pt-5 pb-5">
+    
+        <h3 style="color: #C20000;">Tiempo: <span id = "countdown" ></span></h3>
+        <input id= "tiempo" value = {{test.timer}} hidden ></input>
+   
+        <!-- <div class="progress" style="height: 20px; ">
+            <progress class="progress-bar progress-bar-striped " role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></progress>
+        </div>-->
+                                  
+  
+    </div>
+
+    <div class="row">
+        
+            <form id="msform" method="POST" action = "{% url 'testProshot:save'%}" >  
+                
+                 {% csrf_token %}        
+                    {%for question in lista %}
+                    <fieldset  name ="question_{{question.id}}" class="mb-3">        
+                            {%if question.question_text%}
+                                <h3 class="fs-title">{{question.question_text}}</h3>
+                            {%endif%} 
+                            <div class="text-center">
+                            {%if question.question_imagen%}  
+                                <img src="{{question.question_imagen.url}}"  width = "600" alt="Imagen encabezado">
+                            {%endif%}
+                            {%if question.question_url%} 
+                                <img src="{{question.question_url}}"  alt="...">
+
+                            {%endif%}   
+                            </div>  
+                            <h3 class="fs-title mt-3">Selecciona una alternativa:</h3>
+                        
+                              
+                            <div class="d-block my-3">
+                                {%for answer in answers %}
+                                    {%if answer.question.id == question.id %}  
+                                        <div class="custom-control custom-radio">
+                                            <input id="radio_{{forloop.counter}}" name="radio_{{question.id}}"  class="custom-control-input"  type="radio" value = "{{answer.id}}"/>
+                                            <label class="custom-control-label" for="radio_{{forloop.counter}}"><h4>{{answer.choice_text}}</h4></label>
+                                        </div>
+                                    {%endif %}
+                                {%endfor %}                              
+                      
+                              
+                            </div>
+                         <div class="text-center">
+                            {%if not forloop.first %}
+                                    <input type="button" name="previous" class="previous btn btn-proshot" value="Atras" />
+                                {%endif%}
+                                
+                                {% if forloop.last %}
+                                    <input type="submit" name="submit" class="submit btn btn-success" value="Enviar Respuestas" id="submit" />                           
+                                {% else %}
+                                        <input type="button" name="next" class="next btn btn-proshot " value="Siguiente" /> 
+                                {% endif %}           
+                        </div>
+                    </fieldset>  
+                    {% endfor %}   
+                </form>
+        </div>
+        
+   
+  </div>
+
+
+
+{%endblock%}
+
+{%block js%} 
+      
+       <script src="{%static 'js/countdown.js'%}"></script>
+
+{%endblock%}

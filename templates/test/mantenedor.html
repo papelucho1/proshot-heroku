@@ -1,0 +1,271 @@
+{%extends 'backoffice/layout.html'%}
+{%load widget_tweaks %}
+
+{%block head%}
+
+    
+    {%endblock%}
+    {% block nav_item_testProshot_index %}active{% endblock nav_item_testProshot_index %}
+
+{%block content%}
+<main class="content">
+ 
+     
+                        <div class="row py-4">
+                              
+                            <div class="col-12 col-xl-6 mb-4">
+                           
+                                <div class="card card-body bg-white border-light shadow-sm mb-4">
+                                  <h2 class="h5 mb-4">Test</h2>
+                                                           
+                                        <div class="row">
+                                            <div class="col-sm-8 mb-3">
+                                                <div class="form-group">
+                                                    <label for="nombre_test">Nombre test</label>
+                                                    <input type="text" class="form-control" id="nombre_test" disabled value ="{{test.name_test}}">
+
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                             
+                                                <div class="form-group">
+                                                 <label for="zip">Tiempo (minutos)</label>
+                                                    <div class="input-group mb-4">
+                                                        <input type="text" class="form-control" id="nombre_test" disabled value ="{{test.timer}}">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text"><i class="fas fa-clock"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-8 mb-3">
+                                                <div class="form-group">
+                                                    <label for="nombre_test">Cuantas Preguntas quieres mostrar?</label>
+                                                    <input type="text" class="form-control" id="nombre_test" disabled value ="{{test.cantidadDePreguntas}}">
+
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                             
+                                                <div class="form-group">
+                                                 <label for="zip">Disponible?</label>
+                                                    <div class="input-group mb-4">
+                                                        {%if test.isAvailable %}
+                                                        <input type="text" class="form-control" id="isAvailable" disabled value ="Si">
+                                                        
+                                                        <div class="input-group-append">
+                                                             <span class="input-group-text"><i class="far fa-check-circle"></i></span>
+                                                        
+                                                         </div>
+                                                         {%else%}
+                                                        <input type="text" class="form-control" id="isAvailable" disabled value ="No">
+
+                                                        <div class="input-group-append">
+                                                             <span class="input-group-text"><i class="far fa-times-circle"></i></span>
+                                                         </div>
+                                                        {%endif%}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-3">
+                                            <button  class="btn btn-warning" onclick="abrir_modal_editTest('{%url 'testProshot:editTest' test.id %}')"><i class="far fa-edit"></i> Editar</button>
+                                        </div>
+                            
+                                </div>
+                            </div>
+                            <div class="col-12 col-xl-6 mb-4">
+                                    
+                                        <div class="card border-light shadow-sm  mb-4">                                         
+                                            <div class="card-body">
+                                                <div class=" d-flex mb-4">
+                                                     <h2 class="h5 ">Subconjuntos</h2>
+                                                    <button   onclick="abrir_modal_addSubset('{%url 'testProshot:addSubset' %}')"type="button" class="btn btn-sm btn-outline-primary mr-2 ml-2"><span class="fas fa-plus mr-2"></span>Agregar </button>
+
+                                                </div>
+
+                                                 <table class="table data-table table-bordered "  id = "subsetTable">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Nombre</th>
+                                                            <th scope="col">Puntaje</th>
+                                                            <th scope="col">Accion</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="data tbody">
+                                                        {%for subconjunto in subset%}
+                                                                <tr>
+                                                                    <td>{{subconjunto.name_subset}}</td>
+                                                                    <td>{{subconjunto.value}}</td>
+                                                                    <td>
+                                                                        <button onclick="abrir_modal_editSubset('{%url 'testProshot:editSubset' subconjunto.id%}')" class="btn btn-info btn-sm" ><i class="far fa-edit"></i></button>
+                                                                        <button  onclick="abrir_modal_deleteSubset('{%url 'testProshot:deleteSubset' subconjunto.id%}')" class="btn btn-danger btn-sm" ><i class="far fa-trash-alt"></i></button>
+                                                                    </td>
+                                                                </tr>
+                                                        {%endfor%}       
+                                                        
+                                                    </tbody>
+                                                </table>
+                                         
+                                            </div>
+                                         </div>
+                               
+                            </div>
+                        </div>
+                       
+                        
+                        <div class="card card-body border-light shadow-sm table-wrapper table-responsive ">
+                            <div class=" d-flex mb-4">
+                                <h2 class="h4 ">Preguntas</h2>
+                                <button type="button" onclick="abrir_modal_addPregunta('{%url 'testProshot:addQuestion' %}')" class="btn btn-sm btn-outline-primary mr-2 ml-2"><span class="fas fa-plus mr-2"></span>Agregar </button>
+
+                            </div>
+                            <table class="table " id="dataPreguntas" >
+                                <thead>
+                                    <tr>
+                                        <th>Texto encabezado</th>
+                                        <th>Imagen encabezado</th>                                        
+                                        <th>Respuestas</th>
+                                        <th>Subconjunto</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {%for question in questions%}   
+                                    <tr>
+                                        <td>{{question.question_text}}</td>
+                                        {%if question.question_imagen%}
+                                        <td><img src="{{question.question_imagen.url}}" height="100" alt="..."/></td>
+                                        {%elif  question.question_url%}
+                                        <td>
+                                        <img src="{{question.question_url}}"  height="100" alt="..."/> </td>
+                                        
+                                        {%else%}
+                                        <td></td>
+                                        {%endif%}
+                                        <td>
+                                            
+                                        {%for answer in answers%}
+                                            <div class="d-block">
+                                                {%if answer.question.id == question.id %}
+                                                    {%if answer.is_valid%}
+                                                    <span class="font-weight text-success"><strong>- {{answer.choice_text}}(respuesta correcta)</strong></span>
+                                                    {%else%}
+                                                     <span class="font-weight">- {{answer.choice_text}}</span>
+                                                    {%endif%}
+                                                {%endif%}
+                                            </div>
+                                        {%endfor%}
+                                        </td>
+                                        <td>{{question.score.name_subset}}</td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <span class="icon icon-sm">
+                                                        <span class="fas fa-ellipsis-h icon-dark"></span>
+                                                    </span>
+                                                    <span class="sr-only">Toggle Dropdown</span>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" onclick="abrir_modal_editPregunta('{%url 'testProshot:editQuestion' question.id%}')"><span class="fas fa-edit mr-2"></span>Editar</a>
+                                                    <a class="dropdown-item text-danger" onclick="abrir_modal_deletePregunta('{%url 'testProshot:deleteQuestion' question.id%}')"><span class="fas fa-trash-alt mr-2"></span>Remove</a>
+                                                </div>
+                                            </div>
+                                            
+                                        </td>
+                                    </tr>
+                                {%endfor%}
+                                </tbody>
+                            </table>
+                            
+                            
+                            
+                          
+                        </div>
+                        {%include 'backoffice/footer.html'%}
+                       
+</main>
+
+    <div class="modal fade" id="addSubset" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    </div>
+    <div class="modal fade" id="editSubset" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    </div>
+    <div class="modal fade" id="deleteSubset" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    </div>
+    <!--Preguntas Models-->
+    <div class="modal fade" id="addPregunta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    </div>
+    <div class="modal fade" id="editPregunta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    </div>
+    <div class="modal fade" id="deletePregunta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    </div>
+    <!--Edit test modal-->
+    <div class="modal fade" id="editTest" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    </div>
+
+
+
+<script type="application/javascript">
+    console.log("hola");
+    function abrir_modal_addSubset(url){
+            console.log("asdf");
+        $('#addSubset').load(url, function(){            
+            $(this).modal('show');
+        })
+    }
+    function abrir_modal_editSubset(url){
+        $('#editSubset').load(url, function(){
+            $(this).modal('show');
+        })
+    }
+    function abrir_modal_deleteSubset(url){
+        $('#deleteSubset').load(url, function(){
+            $(this).modal('show');
+        })
+    }
+    function abrir_modal_addPregunta(url){
+        $('#addPregunta').load(url, function(){
+            $(this).modal('show');
+        })
+    }
+    function abrir_modal_editPregunta(url){
+        $('#editPregunta').load(url, function(){
+            $(this).modal('show');
+        })
+    }
+    function abrir_modal_deletePregunta(url){
+        $('#deletePregunta').load(url, function(){
+            $(this).modal('show');
+        })
+    }   
+    function abrir_modal_editTest(url){
+        $('#editTest').load(url, function(){
+            $(this).modal('show');
+        })
+    }    
+
+
+   
+ 
+</script>
+
+{%endblock%}
+{%block js%}
+
+<script type="application/javascript">
+    $(document).ready(function () {     
+        $('#subsetTable').DataTable({
+            responsive : true,
+            autoWidth: false
+        });           
+        $('#dataPreguntas').DataTable({
+            select: true,
+            responsive : true,
+            autoWidth: false
+        });
+    });
+
+</script>
+{%endblock%}

@@ -1,0 +1,122 @@
+{%extends 'registration/layout.html'%}
+{% load widget_tweaks %}
+{%load static%}
+{%block content%}
+
+
+
+        <!-- Section -->
+        <section class="vh-100 d-flex align-items-center section-image overlay-soft-dark" data-background="{%static '/assets/img/saas-form-image.jpg'%}">
+          <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 d-flex align-items-center justify-content-center">
+                        <div class="signin-inner mt-3 mt-lg-0 bg-white shadow-soft border border-light rounded p-4 p-lg-5 w-100 fmxw-500">
+                            <div class="text-center text-md-center mb-4 mt-md-0">
+                                <h1 class="font-weight-bold h3 mb-3">Crear cuenta</h1>
+                            </div>
+                            {%if registerForm.errors%}
+                                <P> Corrije los siguiente errores:</p>
+                                {%for field in registerForm%}
+                                    {%if field.errors%}
+                                        <div class ='alert alert-danger' role='alert'>
+                                            {{field.label}} : {{field.errors|striptags}}
+                                        </div>
+                                    {%endif%}
+                                {%endfor%}
+                            {%endif%}
+                            <form method = "POST">
+                                {% csrf_token %}
+                                 <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-envelope"></i></span>
+                                        </div>
+                                        {% render_field registerForm.first_name class="form-control" placeholder="Nombres" %}
+
+                                        
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-envelope"></i></span>
+                                        </div>
+                                        {% render_field registerForm.last_name class="form-control" placeholder="Apellidos" %}
+
+                                        
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-envelope"></i></span>
+                                        </div>
+                                        {% render_field registerForm.email class="form-control" placeholder="Correo electronico" %}
+
+                                        
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-user"></i></span>
+                                        </div>
+                                        {% render_field registerForm.username class="form-control" placeholder="Nombre de usuario"  %}
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-unlock-alt"></i></span>
+                                        </div>
+                                        {% render_field registerForm.password class="form-control" placeholder="Contraseña"   %}
+
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="far fa-eye"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="input-group mt-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-unlock-alt"></i></span>
+                                        </div>
+                                        {% render_field registerForm.password2 class="form-control" placeholder="Reingrese contraseña" %}
+
+                                      
+                                    </div>
+                                    <div class="d-block d-sm-flex justify-content-between align-items-center mt-2">
+                                        <div class="form-group form-check mt-3">
+                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                            <label class="form-check-label form-check-sign-white" for="exampleCheck1">I agree to the <a href="">terms and conditions</a></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <button type="submit" class="btn btn-block btn-primary">Sign in</button>
+                                </div>
+                            </form>
+                            
+                            <div class="d-block d-sm-flex justify-content-center align-items-center mt-4">
+                                <span class="font-weight-normal">
+                                    Already have an account?
+                                    <a href="{% url 'blog:login' %}" class="font-weight-bold">Login here</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+{%endblock%}
+
+
+
+
+
+
+
+

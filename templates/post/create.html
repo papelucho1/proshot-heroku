@@ -1,0 +1,82 @@
+{%extends 'backoffice/layout.html'%}
+{%load widget_tweaks %}
+{% block nav_item_Post %}active{% endblock nav_item_Post %}
+
+{% block content  %}
+<main class="content">
+
+                  
+                    <div class="row py-4">
+                        <div class="col-12 ">
+                            <div class="card card-body bg-white border-light shadow-sm mb-4">
+                                <h2 class="h5 mb-4">Agregar un nuevo Post</h2>
+                               <form method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    
+                                        <div class="row">
+                                            <div class="col-12 mb-3">
+                                                <div class="form-group">
+                                                    <label for="first_name">Titulo</label>
+                                                    {%render_field postForm.title class="form-control"  placeholder="Ingresa el titulo aquí"  %}
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 mb-3">
+                                                <div class="form-group">
+                                                    <label for="first_name">Subtitulo</label>
+                                                    {%render_field postForm.precontent class="form-control"  placeholder="Ingresa el una breve descripcion del post"  %}
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 mb-3">
+                                                <div class="form-group">
+                                                    {%render_field postForm.content %}
+                                                    {{postForm.media}}
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row">
+                                            <div class="col-12 mb-3">
+                                                <div class="form-group">
+                                                    <label for="first_name">Selecciona categoría</label>
+
+                                                    {%render_field postForm.category class="form-control"%}
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    
+                                    {{formset.as_p}}
+                                   <input type="submit" value="Crear Post" class="btn btn-secondary">
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                    {%include 'backoffice/footer.html'%}
+           
+</main>
+    <script>
+
+ {% if messages %}
+        {% for message in messages %}
+                    {% if message.tags == "success" %}
+                        Swal.fire(
+                        'Post creado',
+                        'Tu post ha sido subido con éxito',
+                        'success'
+                        )                     
+                    {% endif %}
+            {% endfor %}
+
+    {% endif %}
+    </script>
+
+{% endblock %}

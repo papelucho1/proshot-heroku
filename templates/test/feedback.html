@@ -1,0 +1,46 @@
+{%extends 'backoffice/layout.html'%}
+{%load widget_tweaks %}
+
+{%block head%}
+
+    
+    {%endblock%}
+    {% block nav_item_testProshot_index %}active{% endblock nav_item_testProshot_index %}
+
+{%block content%}
+<main class="content">
+
+     <div class="row py-4">
+                              
+                            <div class="col-12 col-xl-12 mb-4">
+                           
+                                <div class="card card-body bg-white border-light shadow-sm mb-4">
+                                  {%if test_not_Ready%}
+                                  Debes realizar el test primero para poder ver tu Resultado
+                                   <a href= "{%url 'testProshot:rendirTest'%}">link </a>
+                                  {%else%}
+                                        <h2 class="h5 mb-4">Resultado {{prueba.name_test}}</h2>
+                                        
+                                        Nombre : {{feedback.user}}
+                                        puntaje total : {{feedback.totalscore}}    
+                                        puntaje por subconjunto: 
+                                        
+                
+                                    
+                                        {%for grupo , puntaje in zipped%}
+                                                {{grupo}} :  {{puntaje}} 
+                                            {%endfor%}
+                                    {%endif%}
+                                </div>
+                            </div>
+
+    </div>
+    <div class="row py-4">
+        <div class="col-12 col-xl-12 mb-4">
+            <a class="btn btn-primary animate-up-2" href="{% url 'testProshot:certificatePDF' feedback.id  %}"><i class="fas fa-file-invoice mr-1"></i> Descargar PDF</a>   
+                 
+        </div>
+
+    </div>
+</main>
+{%endblock%}
